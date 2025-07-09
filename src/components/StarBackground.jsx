@@ -46,13 +46,17 @@ export const StarBackground = () => {
         const newMeteors = [];
 
         for (let i = 0; i < numberOfMeteors; i++) {
+            const animationDuration = Math.random() * 3 + 4; // 4-7 segundos
+            // Comenzar cada meteoro en un punto diferente del ciclo de animación
+            const delay = -(Math.random() * animationDuration); // Delay negativo para comenzar en el medio del ciclo
+            
             newMeteors.push({
-                id:i,
+                id: i,
                 size: Math.random() * 2 + 1,
                 x: Math.random() * 100,
                 y: Math.random() * 20,
-                delay: Math.random() * 15,
-                animationDuration: Math.random() * 3 + 3,
+                delay: delay,
+                animationDuration: animationDuration,
             });
         }
         setMeteors(newMeteors);
@@ -73,15 +77,15 @@ export const StarBackground = () => {
         {meteors.map((meteor) => (
             <div 
                 key={meteor.id} 
-                className="meteor animate-meteor" 
+                className="meteor" 
                 style={{
                     width: `${meteor.size * 50}px`,
                     height: `${meteor.size * 2}px`,
                     left: `${meteor.x}%`,
                     top: `${meteor.y}%`,
+                    animation: `meteor ${meteor.animationDuration}s linear infinite`,
                     animationDelay: `${meteor.delay}s`,
-                    animationDuration: `${meteor.animationDuration}s`,
-            }}/>
+                }}/>
         ))}
     </div>
     );
