@@ -3,30 +3,30 @@ import { ArrowRight, ExternalLink, Github } from "lucide-react"
 const projects = [
     {
         id: 1,
-        title: "Saas Landing Page",
-        description: "A beautiful landing page app using React and Tailwind.",
+        title: "Landing Page SaaS",
+        description: "Una hermosa landing page desarrollada con React y Tailwind CSS, enfocada en conversión.",
         image: "/public/projects/project1.png",
-        tags: ["React", "Tailwind CSS", "Supabase"],
+        tags: ["React", "Tailwind CSS", "JavaScript"],
         demoUrl: "#",
         githubUrl: "#",
     },
 
     {
         id: 2,
-        title: "Orbit Analytics Dashboard",
-        description: "Interactive analytics dashboard with data visualization and filtering capabilities.",
+        title: "Dashboard Analítico",
+        description: "Dashboard interactivo con visualización de datos y capacidades de filtrado avanzado.",
         image: "/public/projects/project2.png",
-        tags: ["TypeScript", "D3.js", "Next.js"],
+        tags: ["React", "Chart.js", "Node.js"],
         demoUrl: "#",
         githubUrl: "#",
     },
 
     {
         id: 3,
-        title: "E-commerce Platform",
-        description: "Full-featured e-commerce platform with user authentication and payment processing.",
+        title: "Sistema de Gestión",
+        description: "Sistema web completo para gestión de inventario con autenticación y roles de usuario.",
         image: "/public/projects/project3.png",
-        tags: ["TypeScript", "D3.js", "Next.js"],
+        tags: ["Java", "Spring Boot", "MySQL"],
         demoUrl: "#",
         githubUrl: "#",
     },
@@ -38,12 +38,12 @@ export const ProjectsSection = () => {
     return <section id="projects" className="py-24 px-4 relative">
         <div className="container mx-auto max-w-5xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-                Featured <span className="text-primary"> Projects </span>
+                Proyectos <span className="text-primary">Destacados</span>
             </h2>
 
             <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-                Here are some of my recent projects. Each project was carefully
-                crafted with attention to detail, performance, and user experience.
+                Aquí algunos de mis proyectos más recientes. Cada proyecto fue cuidadosamente
+                desarrollado con atención al detalle, rendimiento y experiencia de usuario.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -89,7 +89,7 @@ export const ProjectsSection = () => {
                     className="cosmic-button w-fit flex items-center mx-auto gap-2" 
                     target="_blank"
                     href="https://github.com/j0nvthvn">
-                        Check My Github 
+                        Ver Mi GitHub 
                         <ArrowRight size={16}/>
                 </a>
             </div>
