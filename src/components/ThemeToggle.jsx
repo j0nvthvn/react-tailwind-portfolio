@@ -1,5 +1,5 @@
 import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export const ThemeToggle = () => {
@@ -14,7 +14,7 @@ export const ThemeToggle = () => {
             localStorage.setItem("theme", "light");
             setIsDarkMode(false);
         }
-    }, [])
+    }, []);
 
     const toggleTheme = () => {
         if (isDarkMode) {
@@ -26,7 +26,7 @@ export const ThemeToggle = () => {
             localStorage.setItem("theme", "dark");
             setIsDarkMode(true);
         }
-    }
+    };
 
     return (
         <button onClick={toggleTheme} className={cn(

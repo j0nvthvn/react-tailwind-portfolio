@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react"
 
-// id, size, x, y, opacity, animationDuration
-// id, size, x, y, delay, animationDuration
-
 export const StarBackground = () => {
     const [stars, setStars] = useState([]);
     const [meteors, setMeteors] = useState([]);
@@ -22,15 +19,11 @@ export const StarBackground = () => {
 
     const generateStars = () => {
         const numberOfStars = Math.floor(window.innerWidth * window.innerHeight / 10000);
-
-        
-        
-
         const newStars = [];
 
         for (let i = 0; i < numberOfStars; i++) {
             newStars.push({
-                id:i,
+                id: i,
                 size: Math.random() * 3 + 1,
                 x: Math.random() * 100,
                 y: Math.random() * 100,
@@ -46,9 +39,8 @@ export const StarBackground = () => {
         const newMeteors = [];
 
         for (let i = 0; i < numberOfMeteors; i++) {
-            const animationDuration = Math.random() * 3 + 4; // 4-7 segundos
-            // Comenzar cada meteoro en un punto diferente del ciclo de animación
-            const delay = -(Math.random() * animationDuration); // Delay negativo para comenzar en el medio del ciclo
+            const animationDuration = Math.random() * 3 + 4;
+            const delay = -(Math.random() * animationDuration);
             
             newMeteors.push({
                 id: i,
@@ -61,32 +53,37 @@ export const StarBackground = () => {
         }
         setMeteors(newMeteors);
     };
-    return ( 
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0"> 
-        {stars.map((star) => (
-            <div key={star.id} className="star animate-pulse-subtle" style={{
-                width: `${star.size}px`,
-                height: `${star.size}px`,
-                left: `${star.x}%`,
-                top: `${star.y}%`,
-                opacity: star.opacity,
-                animationDuration: `${star.animationDuration}s`,
-            }}/>
-        ))}
+    return (
+        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+            {stars.map((star) => (
+                <div 
+                    key={star.id} 
+                    className="star animate-pulse-subtle" 
+                    style={{
+                        width: `${star.size}px`,
+                        height: `${star.size}px`,
+                        left: `${star.x}%`,
+                        top: `${star.y}%`,
+                        opacity: star.opacity,
+                        animationDuration: `${star.animationDuration}s`,
+                    }}
+                />
+            ))}
 
-        {meteors.map((meteor) => (
-            <div 
-                key={meteor.id} 
-                className="meteor" 
-                style={{
-                    width: `${meteor.size * 50}px`,
-                    height: `${meteor.size * 2}px`,
-                    left: `${meteor.x}%`,
-                    top: `${meteor.y}%`,
-                    animation: `meteor ${meteor.animationDuration}s linear infinite`,
-                    animationDelay: `${meteor.delay}s`,
-                }}/>
-        ))}
-    </div>
+            {meteors.map((meteor) => (
+                <div 
+                    key={meteor.id} 
+                    className="meteor" 
+                    style={{
+                        width: `${meteor.size * 50}px`,
+                        height: `${meteor.size * 2}px`,
+                        left: `${meteor.x}%`,
+                        top: `${meteor.y}%`,
+                        animation: `meteor ${meteor.animationDuration}s linear infinite`,
+                        animationDelay: `${meteor.delay}s`,
+                    }}
+                />
+            ))}
+        </div>
     );
 }

@@ -31,7 +31,8 @@ export const SkillsSection = () => {
     const [activeCategory, setActiveCategory] = useState("todos");
     const filteredSkills = skills.filter((skill) => activeCategory === "todos" || skill.category === activeCategory);
 
-    return <section id="skills" className="py-24 px-4 relative bg-secondary/30">
+    return (
+        <section id="skills" className="py-24 px-4 relative bg-secondary/30">
         <div className="container mx-auto max-w-5xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
                 Mis <span className="text-primary">Habilidades</span>
@@ -68,4 +69,5 @@ export const SkillsSection = () => {
             </div>
         </div>
     </section>
+    );
 };
