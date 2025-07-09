@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
     {name: "Inicio", href: "#hero"},
@@ -38,6 +39,20 @@ export const Navbar = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Prevenir scroll del body cuando el menu móvil está abierto
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        
+        // Cleanup al desmontar el componente
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isMenuOpen]);
     return (
     <nav 
         className={cn(
@@ -52,10 +67,10 @@ export const Navbar = () => {
                 </span>
             </a>
 
-            <div className="hidden md:flex space-x-8">
-                {navItems.map((item, key) => (
+            <div className="hidden md:flex space-x-8 items-center">
+                {navItems.map((item, index) => (
                     <a 
-                        key={key} 
+                        key={`nav-desktop-${item.href}`} 
                         href={item.href} 
                         className="text-foreground/80 hover:text-primary transition-colors duration-300"
                         onClick={(e) => handleNavClick(e, item.href)}
@@ -63,6 +78,9 @@ export const Navbar = () => {
                         {item.name}
                     </a>
                 ))}
+                <div className="ml-4">
+                    <ThemeToggle hideOnMobile={false} />
+                </div>
             </div>
 
             <button 
@@ -75,24 +93,49 @@ export const Navbar = () => {
 
             <div 
                 className={cn(
-                    "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
-                    "transition-all duration-300 md:hidden",
+                    "fixed z-40 md:hidden",
+                    "transition-all duration-300",
                     isMenuOpen 
                     ? "opacity-100 pointer-events-auto" 
                     : "opacity-0 pointer-events-none"
                 )}
+                style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    width: '100vw',
+                    height: '100vh',
+                    backgroundColor: 'hsl(var(--background))',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}
+                onClick={(e) => {
+                    // Cerrar menú si se hace clic en el overlay (no en el contenido)
+                    if (e.target === e.currentTarget) {
+                        setIsMenuOpen(false);
+                    }
+                }}
             >
-                <div className="flex flex-col space-y-8 text-xl">
-                    {navItems.map((item, key) => (
-                        <a 
-                            key={key} 
-                            href={item.href} 
-                            className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                            onClick={(e) => handleNavClick(e, item.href)}
-                        >
-                            {item.name}
-                        </a>
-                    ))}
+                {/* Contenedor centrado con fondo sólido */}
+                <div className="bg-card/95 backdrop-blur-sm rounded-2xl p-8 mx-4 shadow-2xl border border-border/20 max-w-sm w-full">
+                    <div className="flex flex-col space-y-8 text-xl">
+                        {navItems.map((item, index) => (
+                            <a 
+                                key={`nav-mobile-${item.href}`} 
+                                href={item.href} 
+                                className="text-foreground hover:text-primary transition-colors duration-300 text-center py-2 rounded-lg hover:bg-secondary/50"
+                                onClick={(e) => handleNavClick(e, item.href)}
+                            >
+                                {item.name}
+                            </a>
+                        ))}
+                        <div className="flex justify-center mt-6 pt-6 border-t border-border/20">
+                            <ThemeToggle hideOnMobile={false} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

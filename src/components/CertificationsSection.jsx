@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 const certifications = [
     {
-        id: 1,
+        id: "cert-1",
         title: "AWS Cloud Practitioner",
         issuer: "Amazon Web Services",
         date: "2024-03-15",
@@ -17,7 +17,7 @@ const certifications = [
         credentialId: "AWS-CCP-2024-001"
     },
     {
-        id: 2,
+        id: "cert-2",
         title: "React Developer Certificate",
         issuer: "Meta",
         date: "2024-01-20",
@@ -30,7 +30,7 @@ const certifications = [
         credentialId: "META-REACT-2024-002"
     },
     {
-        id: 3,
+        id: "cert-3",
         title: "JavaScript Algorithms and Data Structures",
         issuer: "FreeCodeCamp",
         date: "2023-11-10",
@@ -43,7 +43,7 @@ const certifications = [
         credentialId: "FCC-JS-2023-003"
     },
     {
-        id: 4,
+        id: "cert-4",
         title: "Responsive Web Design",
         issuer: "FreeCodeCamp",
         date: "2023-08-15",
@@ -56,7 +56,7 @@ const certifications = [
         credentialId: "FCC-RWD-2023-004"
     },
     {
-        id: 5,
+        id: "cert-5",
         title: "Node.js Application Development",
         issuer: "IBM",
         date: "2024-05-22",
@@ -69,7 +69,7 @@ const certifications = [
         credentialId: "IBM-NODE-2024-005"
     },
     {
-        id: 6,
+        id: "cert-6",
         title: "Git and GitHub Essentials",
         issuer: "GitHub",
         date: "2023-09-30",
@@ -85,7 +85,7 @@ const certifications = [
 
 const achievements = [
     {
-        id: 1,
+        id: "achievement-1",
         title: "Dean's List - Semestre 2024-1",
         issuer: "Universidad Diego Portales",
         date: "2024-06-15",
@@ -94,7 +94,7 @@ const achievements = [
         icon: Trophy
     },
     {
-        id: 2,
+        id: "achievement-2",
         title: "Hackathon Winner - DevFest Santiago",
         issuer: "Google Developers",
         date: "2024-02-28",
@@ -103,7 +103,7 @@ const achievements = [
         icon: Award
     },
     {
-        id: 3,
+        id: "achievement-3",
         title: "Open Source Contributor",
         issuer: "Various Projects",
         date: "2023-ongoing",
@@ -173,13 +173,13 @@ export const CertificationsSection = () => {
                 </p>
 
                 {/* Filtros */}
-                <div className="flex flex-wrap justify-center gap-3 mb-12">
+                <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12">
                     {categories.map((category) => (
                         <button 
                             key={category}
                             onClick={() => setActiveCategory(category)}
                             className={cn(
-                                "px-4 py-2 rounded-full transition-all duration-300 capitalize text-sm font-medium",
+                                "px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-all duration-300 capitalize text-xs sm:text-sm font-medium whitespace-nowrap",
                                 activeCategory === category 
                                     ? "bg-primary text-primary-foreground shadow-lg" 
                                     : "bg-secondary/70 text-foreground hover:bg-secondary hover:scale-105"
@@ -192,53 +192,59 @@ export const CertificationsSection = () => {
 
                 {/* Timeline de Logros */}
                 <div className="mb-16">
-                    <h3 className="text-2xl font-semibold mb-8 text-center">Timeline de Aprendizaje</h3>
+                    <h3 className="text-xl sm:text-2xl font-semibold mb-8 text-center">Timeline de Aprendizaje</h3>
                     <div className="relative">
-                        {/* Línea central */}
-                        <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary via-primary/50 to-transparent"></div>
+                        {/* Línea central - responsiva */}
+                        <div className="absolute left-6 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary via-primary/50 to-transparent"></div>
                         
                         {filteredItems
                             .sort((a, b) => new Date(b.date) - new Date(a.date))
                             .slice(0, 6) // Mostrar solo los 6 más recientes
                             .map((item, index) => (
                             <div key={item.id} className={cn(
-                                "relative flex items-center mb-12",
-                                index % 2 === 0 ? "justify-start" : "justify-end"
+                                "relative flex items-center mb-8 sm:mb-12",
+                                // En móvil: siempre a la derecha, en desktop: alternado
+                                "justify-start sm:justify-start",
+                                index % 2 === 0 ? "sm:justify-start" : "sm:justify-end"
                             )}>
-                                {/* Punto en la línea */}
-                                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg z-10"></div>
+                                {/* Punto en la línea - responsivo */}
+                                <div className="absolute left-6 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-primary rounded-full border-2 sm:border-4 border-background shadow-lg z-10"></div>
                                 
                                 {/* Contenido */}
                                 <div className={cn(
-                                    "bg-card p-6 rounded-lg shadow-lg max-w-sm mx-8 card-hover",
-                                    index % 2 === 0 ? "mr-auto" : "ml-auto"
+                                    "bg-card p-4 sm:p-6 rounded-lg shadow-lg card-hover",
+                                    // En móvil: margen izquierdo, en desktop: máximo ancho y centrado
+                                    "ml-12 mr-4 sm:mx-8 sm:max-w-sm",
+                                    index % 2 === 0 ? "sm:mr-auto" : "sm:ml-auto"
                                 )}>
-                                    <div className="flex items-start gap-3 mb-3">
+                                    <div className="flex items-start gap-2 sm:gap-3 mb-3">
                                         {item.icon ? (
-                                            <item.icon className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                                            <item.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary mt-1 flex-shrink-0" />
                                         ) : (
-                                            <Award className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                                            <Award className="h-4 w-4 sm:h-5 sm:w-5 text-primary mt-1 flex-shrink-0" />
                                         )}
-                                        <div className="flex-1">
-                                            <h4 className="font-semibold text-sm leading-tight">{item.title}</h4>
-                                            <p className="text-xs text-muted-foreground">{item.issuer}</p>
+                                        <div className="flex-1 min-w-0">
+                                            <h4 className="font-semibold text-xs sm:text-sm leading-tight truncate">{item.title}</h4>
+                                            <p className="text-xs text-muted-foreground truncate">{item.issuer}</p>
                                         </div>
                                     </div>
                                     
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Calendar className="h-3 w-3 text-muted-foreground" />
-                                        <span className="text-xs text-muted-foreground">
-                                            {formatDate(item.date)}
-                                        </span>
+                                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-2">
+                                        <div className="flex items-center gap-1">
+                                            <Calendar className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                                            <span className="text-xs text-muted-foreground">
+                                                {formatDate(item.date)}
+                                            </span>
+                                        </div>
                                         <span className={cn(
-                                            "px-2 py-0.5 rounded-full text-xs border",
+                                            "px-2 py-0.5 rounded-full text-xs border self-start",
                                             getTypeColor(item.type)
                                         )}>
                                             {getTypeLabel(item.type)}
                                         </span>
                                     </div>
                                     
-                                    <p className="text-xs text-muted-foreground leading-relaxed">
+                                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
                                         {item.description}
                                     </p>
                                 </div>
@@ -306,7 +312,7 @@ export const CertificationsSection = () => {
                                 <div className="flex flex-wrap gap-1 mb-4">
                                     {cert.skills?.slice(0, 3).map((skill, index) => (
                                         <span 
-                                            key={index}
+                                            key={`${cert.id}-skill-${index}-${skill}`}
                                             className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-md"
                                         >
                                             {skill}
@@ -345,15 +351,16 @@ export const CertificationsSection = () => {
                 {selectedCert && (
                     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
                         <div className="bg-card rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-                            <div className="p-6">
-                                <div className="flex items-start justify-between mb-6">
-                                    <div>
-                                        <h3 className="text-2xl font-bold mb-2">{selectedCert.title}</h3>
-                                        <p className="text-muted-foreground">{selectedCert.issuer}</p>
+                            <div className="p-4 sm:p-6">
+                                <div className="flex items-start justify-between mb-4 sm:mb-6">
+                                    <div className="flex-1 min-w-0 pr-4">
+                                        <h3 className="text-xl sm:text-2xl font-bold mb-2 leading-tight">{selectedCert.title}</h3>
+                                        <p className="text-muted-foreground text-sm sm:text-base">{selectedCert.issuer}</p>
                                     </div>
                                     <button 
                                         onClick={() => setSelectedCert(null)}
-                                        className="p-2 hover:bg-secondary rounded-full transition-colors"
+                                        className="p-2 hover:bg-secondary rounded-full transition-colors flex-shrink-0"
+                                        aria-label="Cerrar modal"
                                     >
                                         ✕
                                     </button>
@@ -361,28 +368,28 @@ export const CertificationsSection = () => {
 
                                 <div className="space-y-4">
                                     <div>
-                                        <h4 className="font-semibold mb-2">Descripción</h4>
-                                        <p className="text-muted-foreground">{selectedCert.description}</p>
+                                        <h4 className="font-semibold mb-2 text-sm sm:text-base">Descripción</h4>
+                                        <p className="text-muted-foreground text-sm sm:text-base">{selectedCert.description}</p>
                                     </div>
 
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
-                                            <h4 className="font-semibold mb-2">Fecha de obtención</h4>
-                                            <p className="text-muted-foreground">{formatDate(selectedCert.date)}</p>
+                                            <h4 className="font-semibold mb-2 text-sm sm:text-base">Fecha de obtención</h4>
+                                            <p className="text-muted-foreground text-sm sm:text-base">{formatDate(selectedCert.date)}</p>
                                         </div>
                                         <div>
-                                            <h4 className="font-semibold mb-2">ID de credencial</h4>
-                                            <p className="text-muted-foreground font-mono text-sm">{selectedCert.credentialId}</p>
+                                            <h4 className="font-semibold mb-2 text-sm sm:text-base">ID de credencial</h4>
+                                            <p className="text-muted-foreground font-mono text-xs sm:text-sm break-all">{selectedCert.credentialId}</p>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <h4 className="font-semibold mb-2">Habilidades desarrolladas</h4>
+                                        <h4 className="font-semibold mb-2 text-sm sm:text-base">Habilidades desarrolladas</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {selectedCert.skills?.map((skill, index) => (
                                                 <span 
-                                                    key={index}
-                                                    className="px-3 py-1 text-sm bg-primary/10 text-primary rounded-full"
+                                                    key={`${selectedCert.id}-modal-skill-${index}-${skill}`}
+                                                    className="px-2 sm:px-3 py-1 text-xs sm:text-sm bg-primary/10 text-primary rounded-full"
                                                 >
                                                     {skill}
                                                 </span>
@@ -396,7 +403,7 @@ export const CertificationsSection = () => {
                                                 href={selectedCert.verificationUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="cosmic-button w-full flex items-center justify-center gap-2"
+                                                className="cosmic-button w-full flex items-center justify-center gap-2 text-sm sm:text-base"
                                             >
                                                 Verificar certificación
                                                 <ExternalLink className="h-4 w-4" />
