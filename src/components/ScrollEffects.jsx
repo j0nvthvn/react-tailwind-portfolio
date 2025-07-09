@@ -5,7 +5,7 @@ export const ScrollProgressIndicator = () => {
     const { scrollProgress } = useScrollEffect();
 
     return (
-        <div className="fixed top-0 left-0 w-full h-1 bg-secondary/30 z-40">
+        <div className="fixed top-0 left-0 w-full h-1 bg-secondary/30 z-30">
             <div 
                 className="h-full bg-gradient-to-r from-primary via-purple-500 to-blue-500 transition-all duration-300 ease-out"
                 style={{ width: `${scrollProgress}%` }}

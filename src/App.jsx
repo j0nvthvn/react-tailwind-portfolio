@@ -13,16 +13,20 @@ function App() {
     if (isCSSLoaded) {
       // CSS está completamente cargado, mostrar contenido con transición suave
       const loading = document.getElementById('loading');
-      const root = document.getElementById('root');
       
       if (loading) {
+        // Transición más elegante con scale y fade
+        loading.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
         loading.style.opacity = '0';
-        loading.style.transition = 'opacity 0.3s ease-out';
+        loading.style.transform = 'scale(1.05)';
+        
         setTimeout(() => {
           loading.remove();
-        }, 300);
+        }, 600);
       }
       
+      // No aplicar transformaciones al root para evitar conflictos con navbar
+      const root = document.getElementById('root');
       if (root) {
         root.classList.add('css-loaded');
       }

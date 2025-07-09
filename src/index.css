@@ -293,10 +293,31 @@
   transform: none !important;
   contain: layout !important;
   isolation: isolate !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Ensure navbar is never affected by parent transforms */
 .navbar-fixed,
 .navbar-fixed * {
   transform-style: flat !important;
+}
+
+/* Ensure navbar container is always properly sized */
+.navbar-fixed .container {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Animación de entrada para el contenido principal */
+.main-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.css-loaded .main-content {
+  opacity: 1;
+  transform: translateY(0);
 }

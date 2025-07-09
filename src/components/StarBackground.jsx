@@ -34,6 +34,11 @@ export const StarBackground = () => {
         const generateMeteors = () => {
             const numberOfMeteors = 5;
             const newMeteors = [];
+            
+            // Calcular distancias dinámicamente basadas en el tamaño de la pantalla
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const diagonalDistance = Math.sqrt(screenWidth * screenWidth + screenHeight * screenHeight);
 
             for (let i = 0; i < numberOfMeteors; i++) {
                 const startX = Math.random() * 30 + 100;
@@ -47,6 +52,7 @@ export const StarBackground = () => {
                     duration: Math.random() * 3 + 2,
                     delay: Math.random() * 8 + 1,
                     tailLength: Math.random() * 100 + 150,
+                    travelDistance: diagonalDistance * 1.5, // 1.5x la diagonal para asegurar que cruza toda la pantalla
                 });
             }
             setMeteors(newMeteors);
@@ -57,6 +63,7 @@ export const StarBackground = () => {
 
         const handleResize = () => {
             generateStars();
+            generateMeteors();
         };
 
         window.addEventListener('resize', handleResize);
@@ -143,7 +150,7 @@ export const StarBackground = () => {
                             0 0 12px rgba(255, 255, 255, 0.3),
                             0 0 16px rgba(135, 206, 250, 0.2)
                         `,
-                        animation: `meteorShoot ${meteor.duration}s linear`,
+                        animation: `meteorShoot-${meteor.id} ${meteor.duration}s linear`,
                     }}
                 />
             ))}
@@ -165,7 +172,7 @@ export const StarBackground = () => {
                             0 0 16px rgba(255, 255, 255, 0.8),
                             0 0 24px rgba(135, 206, 250, 0.4)
                         `,
-                        animation: `meteorShoot ${meteor.duration}s linear`,
+                        animation: `meteorShoot-${meteor.id} ${meteor.duration}s linear`,
                         transform: 'translate(-2px, -1px)', // Centrar en la cabeza del meteoro
                     }}
                 />
@@ -184,22 +191,24 @@ export const StarBackground = () => {
                         }
                     }
 
-                    @keyframes meteorShoot {
-                        0% {
-                            transform: translateX(0) translateY(0) rotate(-45deg);
-                            opacity: 0;
+                    ${meteors.map(meteor => `
+                        @keyframes meteorShoot-${meteor.id} {
+                            0% {
+                                transform: translateX(0) translateY(0) rotate(-45deg);
+                                opacity: 0;
+                            }
+                            5% {
+                                opacity: 1;
+                            }
+                            95% {
+                                opacity: 1;
+                            }
+                            100% {
+                                transform: translateX(-${meteor.travelDistance}px) translateY(${meteor.travelDistance}px) rotate(-45deg);
+                                opacity: 0;
+                            }
                         }
-                        5% {
-                            opacity: 1;
-                        }
-                        95% {
-                            opacity: 1;
-                        }
-                        100% {
-                            transform: translateX(-1000px) translateY(1000px) rotate(-45deg);
-                            opacity: 0;
-                        }
-                    }
+                    `).join('')}
                 `
             }} />
         </div>
