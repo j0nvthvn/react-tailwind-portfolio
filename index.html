@@ -11,8 +11,37 @@
     <meta property="og:description" content="Estudiante de Ingeniería Civil en Informática y Telecomunicaciones creando experiencias web modernas." />
     <meta property="og:type" content="website" />
     <title>Jonathan Flores - Desarrollador Web | Estudiante UDP</title>
+    <style>
+      /* Prevenir FOUC - ocultar contenido hasta que esté listo */
+      #root {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      #root.loaded {
+        opacity: 1;
+      }
+      /* Loading spinner */
+      .loading-spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f4f6;
+        border-top: 4px solid #8b5cf6;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        z-index: 9999;
+      }
+      @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
+    <div class="loading-spinner" id="loading"></div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

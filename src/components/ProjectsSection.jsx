@@ -5,7 +5,7 @@ const projects = [
         id: 1,
         title: "Landing Page SaaS",
         description: "Una hermosa landing page desarrollada con React y Tailwind CSS, enfocada en conversión.",
-        image: "/public/projects/project1.png",
+        image: "/projects/project1.png",
         tags: ["React", "Tailwind CSS", "JavaScript"],
         demoUrl: "#",
         githubUrl: "#",
@@ -15,7 +15,7 @@ const projects = [
         id: 2,
         title: "Dashboard Analítico",
         description: "Dashboard interactivo con visualización de datos y capacidades de filtrado avanzado.",
-        image: "/public/projects/project2.png",
+        image: "/projects/project2.png",
         tags: ["React", "Chart.js", "Node.js"],
         demoUrl: "#",
         githubUrl: "#",
@@ -25,7 +25,7 @@ const projects = [
         id: 3,
         title: "Sistema de Gestión",
         description: "Sistema web completo para gestión de inventario con autenticación y roles de usuario.",
-        image: "/public/projects/project3.png",
+        image: "/projects/project3.png",
         tags: ["Java", "Spring Boot", "MySQL"],
         demoUrl: "#",
         githubUrl: "#",
@@ -48,8 +48,22 @@ export const ProjectsSection = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {projects.map((project) => (
                     <div key={project.id} className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover">
-                        <div className="h-48 overflow-hidden">
-                            <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                        <div className="h-48 overflow-hidden bg-secondary/20 flex items-center justify-center">
+                            <img 
+                                src={project.image} 
+                                alt={project.title} 
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.nextSibling.style.display = 'flex';
+                                }}
+                                onLoad={(e) => {
+                                    e.target.nextSibling.style.display = 'none';
+                                }}
+                            />
+                            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-muted-foreground">
+                                <span>Imagen del proyecto</span>
+                            </div>
                         </div>
                         <div className="p-6">
                             <div className="flex flex-wrap gap-2 mb-4">
