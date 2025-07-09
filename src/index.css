@@ -55,6 +55,34 @@
     }
   }
 
+  @keyframes meteor-fall-improved {
+    0% {
+      transform: translateX(300px) translateY(-300px) rotate(45deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-300px) translateY(300px) rotate(45deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes star-twinkle-improved {
+    0%, 100% { 
+      opacity: 0.4; 
+      transform: scale(1); 
+    }
+    50% { 
+      opacity: 1; 
+      transform: scale(1.1); 
+    }
+  }
+
   @keyframes meteor {
     0% {
       transform: rotate(215deg) translateX(0);

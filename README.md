@@ -11,6 +11,9 @@ A modern, responsive portfolio website built with React, Vite, and Tailwind CSS.
 - **Contact Form**: Functional contact form with toast notifications
 - **Modern UI**: Clean, professional design with Tailwind CSS
 - **Performance Optimized**: Built with Vite for fast development and production builds
+- **FOUC Prevention**: Advanced loading system prevents Flash of Unstyled Content
+- **Resource Preloading**: Critical resources are preloaded for optimal performance
+- **Production Ready**: Optimized for deployment on Vercel and other platforms
 
 ## 🛠️ Technologies Used
 
@@ -93,6 +96,30 @@ Modify the content in each section component to reflect your personal informatio
 
 ### Images
 Replace placeholder images in the `public/projects/` directory with your actual project screenshots.
+
+## 🚀 Performance Optimizations
+
+This portfolio includes several advanced optimizations to ensure optimal loading performance and user experience:
+
+### FOUC Prevention
+- **CSS Loading Detection**: Custom hook that verifies Tailwind CSS is fully loaded before rendering content
+- **Smart Loading Screen**: Beautiful loading animation that hides until styles are ready
+- **Environment-Aware Timing**: Different loading strategies for development vs production
+
+### Resource Optimization
+- **Critical Resource Preloading**: Images and CSS are preloaded for faster initial load
+- **Lazy Loading**: Non-critical resources are loaded after initial render
+- **DNS Prefetching**: External resources are prefetched to reduce latency
+
+### Production Deployment
+- **Vercel Optimized**: Special handling for Vercel deployment environments
+- **Chunked Loading**: Code splitting ensures only necessary code is loaded initially
+- **Compressed Assets**: All assets are optimized and compressed for production
+
+### Development Features
+- **Hot Module Replacement**: Fast refresh during development
+- **Source Maps**: Easy debugging with proper source mapping
+- **Error Boundaries**: Graceful error handling in production
 
 ## 📞 Contact
 
